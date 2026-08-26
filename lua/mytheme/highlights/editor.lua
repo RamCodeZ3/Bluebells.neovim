@@ -1,0 +1,62 @@
+local M = {}
+
+---@param config MyThemeConfig
+function M.setup(config)
+  local palette = require("mytheme.colors")
+
+  return {
+    ColorColumn   = { bg = palette.bg2 },
+    Cursor        = { bg = palette.fg3, fg = palette.bg0 },
+    lCursor       = { link = "Cursor" },
+    CursorLine    = { bg = palette.bg2 },
+    CursorColumn  = { link = "CursorLine" },
+    CursorLineNr  = { bg = palette.bg2, fg = palette.fg4 },
+    LineNr        = { fg = palette.mutedGray },
+    Directory     = { fg = palette.blue },
+    DiffAdd       = { bg = palette.mutedGreen, fg = palette.green },
+    DiffChange    = { bg = palette.mutedYellow, fg = palette.yellow },
+    DiffDelete    = { bg = palette.mutedRed, fg = palette.red },
+    DiffText      = { bg = palette.yellow, fg = palette.bg0 },
+    EndOfBuffer   = { fg = palette.bg2 },
+    ErrorMsg      = { fg = palette.red },
+    WinSeparator  = { fg = palette.bg3 },
+    VertSplit     = { link = "WinSeparator" },
+    Folded        = { fg = palette.magenta, bg = palette.bg3 },
+    FoldColumn    = { bg = palette.bg3 },
+    SignColumn    = { bg = palette.bg0, fg = palette.fg4 },
+    IncSearch     = { bg = palette.mutedYellow, fg = palette.yellow },
+    Search        = { bg = palette.mutedGray, fg = palette.yellow },
+    Substitute    = { bg = palette.mutedGreen, fg = palette.green },
+    MatchParen    = { bg = palette.mutedGray, fg = palette.fg4 },
+    ModeMsg       = { bg = palette.bg2, bold = true },
+    MoreMsg       = { fg = palette.blue },
+    NonText       = { fg = palette.mutedGray },
+    Normal        = { bg = config.transparent and "NONE" or palette.bg0, fg = palette.fg3 },
+    NormalFloat   = { bg = palette.bg2, fg = palette.fg3 },
+    FloatBorder   = { bg = palette.bg2, fg = palette.fg2 },
+    FloatTitle    = { fg = palette.fg2 },
+    NormalNC      = config.dimInactive and { bg = palette.bg1, fg = palette.fg2 } or { link = "Normal" },
+    Pmenu         = { bg = palette.bg1, fg = palette.fg3 },
+    PmenuSel      = { bg = palette.bg2, fg = palette.fg4 },
+    PmenuSbar     = { bg = palette.bg3 },
+    PmenuThumb    = { bg = palette.mutedGray },
+    Question      = { link = "MoreMsg" },
+    QuickFixLine  = { bg = palette.bg3 },
+    SpecialKey    = { fg = palette.red },
+    SpellBad      = { undercurl = config.undercurl, sp = palette.red },
+    SpellCap      = { undercurl = config.undercurl, sp = palette.yellow },
+    StatusLine    = { bg = palette.bg1, fg = palette.fg3 },
+    StatusLineNC  = { bg = palette.bg1, fg = palette.fg1 },
+    TabLine       = { bg = palette.bg1, fg = palette.fg1 },
+    TabLineFill   = { bg = palette.bg0 },
+    TabLineSel    = { bg = palette.bg2, fg = palette.fg4 },
+    Title         = { fg = palette.blue, bold = true },
+    Visual        = { bg = palette.bg3 },
+    VisualNOS     = { link = "Visual" },
+    WarningMsg    = { fg = palette.yellow },
+    Whitespace    = { fg = palette.mutedGray },
+    WildMenu      = { link = "PmenuSel" },
+  }
+end
+
+return M
