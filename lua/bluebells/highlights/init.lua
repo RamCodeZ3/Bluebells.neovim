@@ -1,10 +1,10 @@
 local M = {}
 
----@param config? MyThemeConfig
+---@param config? BluebellsConfig
 function M.apply(config)
-  config = config or require("mytheme").config
+  config = config or require("bluebells").config
 
-  -- agrega aquí nuevos módulos cuando sumes soporte para más plugins
+  -- add new modules here as you extend support to more plugins
   local hl_files = {
     "editor",
     "syntax",
@@ -17,7 +17,7 @@ function M.apply(config)
   }
 
   for _, highlight in ipairs(hl_files) do
-    local ok, highlights = pcall(require, "mytheme.highlights." .. highlight)
+    local ok, highlights = pcall(require, "bluebells.highlights." .. highlight)
     if ok then
       local groups = highlights.setup(config)
       for hl, spec in pairs(groups) do

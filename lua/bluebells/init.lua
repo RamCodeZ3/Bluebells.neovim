@@ -1,6 +1,6 @@
 local M = {}
 
----@class MyThemeConfig
+---@class BluebellsConfig
 M.config = {
   undercurl = true,
   commentStyle = { italic = true },
@@ -12,11 +12,11 @@ M.config = {
   terminalColors = true,
   transparent = false,
   ---@type { dark: string, light: string }
-  background = { dark = "default", light = "default" }, -- para cuando tengas variante light
+  background = { dark = "default", light = "default" }, -- reserved for a future light variant
   theme = "default",
 }
 
----@param opts? MyThemeConfig
+---@param opts? BluebellsConfig
 function M.setup(opts)
   M.config = vim.tbl_deep_extend("force", M.config, opts or {})
 end
@@ -31,10 +31,10 @@ function M.load(theme)
     vim.cmd("hi clear")
   end
 
-  vim.g.colors_name = "mytheme"
+  vim.g.colors_name = "bluebells"
   vim.o.termguicolors = true
 
-  require("mytheme.highlights").apply(config)
+  require("bluebells.highlights").apply(config)
 end
 
 return M

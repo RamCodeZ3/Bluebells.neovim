@@ -1,0 +1,62 @@
+local M = {}
+
+---@param config BluebellsConfig
+function M.setup(config)
+  local p = require("bluebells.colors")
+
+  return {
+    ColorColumn   = { bg = p.panel },
+    Cursor        = { bg = p.fg, fg = p.bg },
+    lCursor       = { link = "Cursor" },
+    CursorLine    = { bg = p.panel },
+    CursorColumn  = { link = "CursorLine" },
+    CursorLineNr  = { bg = p.panel, fg = p.fg },
+    LineNr        = { fg = p.muted },
+    Directory     = { fg = p.parameter },
+    DiffAdd       = { bg = p.bg, fg = p.property },
+    DiffChange    = { bg = p.bg, fg = p.warning },
+    DiffDelete    = { bg = p.bg, fg = p.error },
+    DiffText      = { bg = p.bg, fg = p.number },
+    EndOfBuffer   = { fg = p.bg },
+    ErrorMsg      = { fg = p.error },
+    WinSeparator  = { fg = p.border },
+    VertSplit     = { link = "WinSeparator" },
+    Folded        = { fg = p.type, bg = p.panel },
+    FoldColumn    = { bg = p.panel2 },
+    SignColumn    = { bg = p.bg, fg = p.fg },
+    IncSearch     = { bg = p.warning, fg = p.bg },
+    Search        = { bg = p.panel2, fg = p.number },
+    Substitute    = { bg = p.property, fg = p.bg },
+    MatchParen    = { bg = p.panel2, fg = p.fg, bold = true },
+    ModeMsg       = { bg = p.panel, bold = true },
+    MoreMsg       = { fg = p.parameter },
+    NonText       = { fg = p.muted },
+    Normal        = { bg = config.transparent and "NONE" or p.bg, fg = p.fg },
+    NormalFloat   = { bg = p.panel, fg = p.fg },
+    FloatBorder   = { bg = p.panel, fg = p.border },
+    FloatTitle    = { fg = p.parameter },
+    NormalNC      = config.dimInactive and { bg = p.panel, fg = p.muted } or { link = "Normal" },
+    Pmenu         = { bg = p.panel, fg = p.fg },
+    PmenuSel      = { bg = p.panel2, fg = p.fg, bold = true },
+    PmenuSbar     = { bg = p.panel2 },
+    PmenuThumb    = { bg = p.border },
+    Question      = { link = "MoreMsg" },
+    QuickFixLine  = { bg = p.panel2 },
+    SpecialKey    = { fg = p.type },
+    SpellBad      = { undercurl = config.undercurl, sp = p.error },
+    SpellCap      = { undercurl = config.undercurl, sp = p.warning },
+    StatusLine    = { bg = p.panel2, fg = p.fg },
+    StatusLineNC  = { bg = p.panel2, fg = p.muted },
+    TabLine       = { bg = p.panel, fg = p.muted },
+    TabLineFill   = { bg = p.bg },
+    TabLineSel    = { bg = p.panel2, fg = p.fg },
+    Title         = { fg = p.parameter, bold = true },
+    Visual        = { bg = p.selection },
+    VisualNOS     = { link = "Visual" },
+    WarningMsg    = { fg = p.warning },
+    Whitespace    = { fg = p.border },
+    WildMenu      = { link = "PmenuSel" },
+  }
+end
+
+return M

@@ -1,54 +1,83 @@
-# mytheme.nvim (scaffold)
+# bluebells.nvim
 
-Estructura base para un colorscheme de Neovim, lista para renombrar y llenar
-con tu propia paleta.
+A Neovim colorscheme built on the Bluebells palette (dark, blue/violet/moss
+accents on a near-black background).
 
-## Cómo renombrar `mytheme` por el nombre real de tu plugin
-
-Desde la raíz del proyecto (ejemplo cambiando a "kiroi"):
-
-```bash
-# 1. Renombrar carpetas y archivos
-mv lua/mytheme lua/kiroi
-mv colors/mytheme.vim colors/kiroi.vim
-
-# 2. Reemplazar todas las referencias "mytheme" -> "kiroi" en el código
-grep -rl "mytheme" . | xargs sed -i 's/mytheme/kiroi/g'
-```
-
-## Probarlo localmente (lazy.nvim)
+## Try it locally (lazy.nvim)
 
 ```lua
 {
-  dir = "~/ruta/a/mytheme.nvim",
-  name = "mytheme",
+  dir = "~/path/to/bluebells.nvim",
+  name = "bluebells",
   priority = 1000,
   config = function()
-    vim.cmd.colorscheme("mytheme")
+    vim.cmd.colorscheme("bluebells")
   end,
 }
 ```
 
-## Flujo de trabajo recomendado
+## Structure
 
-1. Define tu paleta en `lua/mytheme/colors.lua` (es el único archivo con hex codes).
-2. Ajusta `lua/mytheme/highlights/editor.lua` — esto define cómo se ve el "chrome"
-   del editor (Normal, StatusLine, Pmenu, etc.). Pruébalo antes de tocar sintaxis.
-3. Ajusta `lua/mytheme/highlights/syntax.lua` — grupos clásicos de Vim
-   (Comment, String, Function, Keyword...). Esto ya cubre plugins/lenguajes
-   que no usan Treesitter.
-4. Ajusta `lua/mytheme/highlights/treesitter.lua` — grupos `@capture` modernos,
-   usados por la mayoría de los parsers hoy en día.
-5. Ajusta `lua/mytheme/highlights/lsp.lua` — diagnósticos (error/warn/info/hint).
-6. Cuando quieras soporte de plugins externos (nvim-tree, gitsigns, cmp, etc.),
-   crea un archivo nuevo en `lua/mytheme/highlights/plugins/<nombre>.lua` con
-   la misma forma (`M.setup(config)` retornando una tabla de grupos) y agrégalo
-   a la lista `hl_files` en `lua/mytheme/highlights/init.lua`.
+```
+bluebells.nvim/
+├── colors/
+│   └── bluebells.vim          -- entry point, detected by :colorscheme bluebells
+└── lua/
+    └── bluebells/
+        ├── init.lua           -- user config + setup()/load()
+        ├── colors.lua         -- the single source of truth for every hex value
+        └── highlights/
+            ├── init.lua       -- applies every highlight module
+            ├── editor.lua     -- core UI groups (Normal, StatusLine, Pmenu, ...)
+            ├── syntax.lua     -- classic Vim syntax groups (Comment, String, ...)
+            ├── lsp.lua        -- diagnostic groups
+            └── treesitter.lua -- @capture groups
+```
 
-## Notas
+## Palette (`lua/bluebells/colors.lua`)
 
-- Ningún archivo de highlights debe tener hex codes hardcodeados: siempre
-  referencian `palette.nombreDelColor`.
-- `config.transparent`, `config.dimInactive`, `config.undercurl` y los
-  `*Style` ya están cableados como ejemplo de opciones configurables por el
-  usuario vía `require("mytheme").setup({...})`.
+Every value comes straight from the Bluebells design tokens:
+
+| token         | hex       | used for                         |
+|---------------|-----------|-----------------------------------|
+| `bg`          | `#100F0F` | editor background                 |
+| `panel`       | `#181818` | floats, popups                    |
+| `panel2`      | `#202020` | statusline, tabline                |
+| `border`      | `#2a2a2a` | window separators, float borders   |
+| `fg`          | `#ccd4dd` | default text                       |
+| `muted`       | `#4f5563` | comments, punctuation, line numbers|
+| `parameter`   | `#b0c4de` | function parameters, operators     |
+| `property`    | `#52b788` | object properties, attributes      |
+| `function`    | `#5c7ccf` | function names                     |
+| `type`        | `#9b72cf` | types, keywords, booleans, tags     |
+| `constructor` | `#3a5a40` | constructors                        |
+| `string`      | `#8cb416` | strings                            |
+| `number`      | `#e09f3e` | numbers                            |
+| `error`       | `#c94c4c` | error diagnostics                  |
+| `warning`     | `#e09f3e` | warning diagnostics                 |
+| `info`        | `#b0c4de` | info diagnostics                    |
+| `hint`        | `#52b788` | hint diagnostics                    |
+| `selection`   | `#3a3a3a` | visual selection                    |
+
+Nothing outside `colors.lua` should ever hardcode a hex value — every
+highlight file references `p.<token>` instead.
+
+## Adding plugin support
+
+Create `lua/bluebells/highlights/plugins/<name>.lua` following the same shape:
+
+```lua
+local M = {}
+
+function M.setup(config)
+  local p = require("bluebells.colors")
+  return {
+    -- HighlightGroupName = { fg = p.something, bg = p.panel },
+  }
+end
+
+return M
+```
+
+Then uncomment / add its path to the `hl_files` list in
+`lua/bluebells/highlights/init.lua`.
