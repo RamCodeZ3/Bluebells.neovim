@@ -32,7 +32,8 @@ function M.setup(config)
     ["@keyword.export"]   = { fg = p.keyword, italic = true }, -- export/default
     ["@keyword.type"]     = { link = "Keyword" },              -- const/let/var
     ["@keyword.coroutine"] = { link = "Keyword" },              -- async/await
-    ["@keyword.exception"] = { fg = p.keyword },                -- try/catch/throw, same violet as other keywords
+    ["@keyword.exception"] = { link = "Exception" },            -- try/catch/throw — cascades from Statement/Keyword automatically
+    ["@exception"]         = { link = "Exception" },            -- alt capture name used by some parsers
     ["@keyword.conditional"] = { link = "Conditional" },
     ["@conditional"]      = { link = "Conditional" },
     ["@repeat"]           = { link = "Repeat" },

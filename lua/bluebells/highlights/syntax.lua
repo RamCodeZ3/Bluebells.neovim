@@ -17,13 +17,24 @@ function M.setup(config)
     Identifier = { fg = p.variable },
     Function   = { fg = p["function"], italic = config.functionStyle.italic },
 
+    -- Python-specific legacy syntax groups (python-syntax plugin ships its
+    -- own hardcoded fallback colors, e.g. #DCDCAA for pythonAttribute, if a
+    -- colorscheme doesn't override them explicitly — so we must set these
+    -- directly rather than relying on a link).
+    pythonAttribute = { fg = p.property, italic = true },              -- obj.attr / self.attr
+    pythonClassVar  = { fg = p.type, italic = true },    -- self, cls
+    pythonBoolean = { fg = p.type, italic = true},
+
     Statement    = { fg = p.keyword, italic = config.statementStyle.italic },
     Conditional  = { link = "Statement" },
     Repeat       = { link = "Statement" },
     Label        = { link = "Statement" },
     Operator     = { fg = p.operator },
     Keyword      = { fg = p.keyword, italic = config.keywordStyle.italic },
-    Exception    = { fg = p.error },
+    -- Exception (try/catch) intentionally left undefined: Vim's built-in
+    -- defaults link it to Statement, which we already set to p.keyword above.
+    -- Defining our own Exception here is what caused it to drift out of sync
+    -- with Keyword before — don't reintroduce that override.
 
     PreProc      = { fg = p.type },
     Include      = { link = "PreProc" },
