@@ -3,6 +3,11 @@
 A Neovim colorscheme built on the Bluebells palette (dark, blue/violet/moss
 accents on a near-black background).
 
+Bluebells starts Treesitter highlighting automatically for JavaScript,
+TypeScript, TSX, Python and Rust when their parsers are installed. Set
+`treesitter = false` in `require("bluebells").setup()` if highlighting is
+managed elsewhere in your configuration.
+
 ## Try it locally (lazy.nvim)
 
 ```lua

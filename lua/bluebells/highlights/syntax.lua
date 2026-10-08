@@ -21,9 +21,9 @@ function M.setup(config)
     -- own hardcoded fallback colors, e.g. #DCDCAA for pythonAttribute, if a
     -- colorscheme doesn't override them explicitly — so we must set these
     -- directly rather than relying on a link).
-    pythonAttribute = { fg = p.property, italic = true },              -- obj.attr / self.attr
-    pythonClassVar  = { fg = p.type, italic = true },    -- self, cls
-    pythonBoolean = { fg = p.type, italic = true},
+    pythonAttribute = { fg = p.property, italic = true }, -- obj.attr / self.attr
+    pythonClassVar  = { fg = p.type, italic = true },     -- self, cls
+    pythonBoolean   = { fg = p.boolean, bold = true },
 
     Statement    = { fg = p.keyword, italic = config.statementStyle.italic },
     Conditional  = { link = "Statement" },

@@ -28,24 +28,39 @@ function M.setup(config)
     LspInlayHint      = { fg = p.muted, bg = p.panel },
     LspSignatureActiveParameter = { fg = p.number, bold = true },
 
-    -- explicit semantic token overrides, in case @lsp.type.* doesn't
-    -- inherit from the equivalent @treesitter capture on its own
-    ["@lsp.type.variable"]  = { fg = p.variable },
-    ["@lsp.type.parameter"] = { fg = p.parameter },
-    ["@lsp.type.property"]  = { fg = p.property },
-    ["@lsp.type.function"]  = { fg = p["function"] },
-    ["@lsp.type.method"]    = { fg = p["function"] },
-    ["@lsp.type.type"]      = { fg = p.type },
-    ["@lsp.type.class"]     = { fg = p.type },
-    ["@lsp.type.interface"] = { fg = p.type },
-    ["@lsp.type.enum"]      = { fg = p.type },
-    ["@lsp.type.enumMember"] = { fg = p.constant },
-    ["@lsp.type.namespace"] = { fg = p.type },
-    ["@lsp.type.operator"]  = { fg = p.operator },
-    ["@lsp.type.keyword"]   = { fg = p.keyword },
-    ["@lsp.type.string"]    = { fg = p.string },
-    ["@lsp.type.number"]    = { fg = p.number },
-    ["@lsp.mod.readonly"]   = {}, -- keep base color, just a modifier
+    -- Semantic tokens have a higher priority than Treesitter. Define every
+    -- token commonly emitted by tsserver/vtsls, basedpyright/pyright and
+    -- rust-analyzer so those servers preserve the Bluebells palette.
+    ["@lsp.type.variable"]      = { fg = p.variable },
+    ["@lsp.type.parameter"]     = { fg = p.parameter },
+    ["@lsp.type.property"]      = { fg = p.property },
+    ["@lsp.type.enumMember"]    = { fg = p.constant },
+    ["@lsp.type.function"]      = { fg = p["function"] },
+    ["@lsp.type.method"]        = { fg = p["function"] },
+    ["@lsp.type.functionType"]  = { fg = p.type },
+    ["@lsp.type.type"]          = { fg = p.type },
+    ["@lsp.type.typeParameter"] = { fg = p.type, italic = true },
+    ["@lsp.type.class"]         = { fg = p.type },
+    ["@lsp.type.interface"]     = { fg = p.type },
+    ["@lsp.type.enum"]          = { fg = p.type },
+    ["@lsp.type.struct"]        = { fg = p.type },
+    ["@lsp.type.namespace"]     = { fg = p.type },
+    ["@lsp.type.decorator"]     = { fg = p.attribute },
+    ["@lsp.type.macro"]         = { fg = p.type },
+    ["@lsp.type.operator"]      = { fg = p.operator },
+    ["@lsp.type.keyword"]       = { fg = p.keyword },
+    ["@lsp.type.comment"]       = { fg = p.comment, italic = config.commentStyle.italic },
+    ["@lsp.type.string"]        = { fg = p.string },
+    ["@lsp.type.regexp"]        = { fg = p.string },
+    ["@lsp.type.number"]        = { fg = p.number },
+
+    -- rust-analyzer extensions to the standard semantic-token vocabulary.
+    ["@lsp.type.builtinType"]      = { fg = p.type, italic = true },
+    ["@lsp.type.selfKeyword"]      = { fg = p.type, italic = true },
+    ["@lsp.type.selfTypeKeyword"]  = { fg = p.type, italic = true },
+    ["@lsp.type.lifetime"]         = { fg = p.parameter },
+    ["@lsp.type.formatSpecifier"]  = { fg = p.number },
+    ["@lsp.type.deriveHelper"]     = { fg = p.attribute },
   }
 end
 
