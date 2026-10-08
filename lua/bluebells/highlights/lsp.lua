@@ -26,7 +26,7 @@ function M.setup(config)
     LspReferenceWrite = { link = "LspReferenceText" },
     LspCodeLens       = { fg = p.muted },
     LspInlayHint      = { fg = p.muted, bg = p.panel },
-    LspSignatureActiveParameter = { fg = p.number, bold = true },
+    LspSignatureActiveParameter = { fg = p.number, bold = false, italic = false },
 
     -- Semantic tokens have a higher priority than Treesitter. Define every
     -- token commonly emitted by tsserver/vtsls, basedpyright/pyright and
@@ -39,25 +39,36 @@ function M.setup(config)
     ["@lsp.type.method"]        = { fg = p["function"] },
     ["@lsp.type.functionType"]  = { fg = p.type },
     ["@lsp.type.type"]          = { fg = p.type },
-    ["@lsp.type.typeParameter"] = { fg = p.type, italic = true },
+    ["@lsp.type.typeParameter"] = { fg = p.type, italic = false, bold = false },
     ["@lsp.type.class"]         = { fg = p.type },
     ["@lsp.type.interface"]     = { fg = p.type },
     ["@lsp.type.enum"]          = { fg = p.type },
     ["@lsp.type.struct"]        = { fg = p.type },
     ["@lsp.type.namespace"]     = { fg = p.type },
-    ["@lsp.type.decorator"]     = { fg = p.attribute },
+    ["@lsp.type.decorator"]     = { fg = p["function"] },
     ["@lsp.type.macro"]         = { fg = p.type },
     ["@lsp.type.operator"]      = { fg = p.operator },
     ["@lsp.type.keyword"]       = { fg = p.keyword },
-    ["@lsp.type.comment"]       = { fg = p.comment, italic = config.commentStyle.italic },
+    ["@lsp.type.comment"]       = { fg = p.comment, italic = false, bold = false },
     ["@lsp.type.string"]        = { fg = p.string },
     ["@lsp.type.regexp"]        = { fg = p.string },
     ["@lsp.type.number"]        = { fg = p.number },
 
+    -- basedpyright extensions used by Python. Defining these explicitly is
+    -- important because semantic tokens take precedence over Treesitter.
+    ["@lsp.type.builtinConstant"] = { fg = p.boolean },
+    ["@lsp.type.selfParameter"]   = { fg = p.keyword },
+    ["@lsp.type.clsParameter"]    = { fg = p.keyword },
+
+    -- A readonly variable is how pyright-family servers commonly describe
+    -- module constants such as MAX_USERS.
+    ["@lsp.typemod.variable.readonly"] = { fg = p.constant },
+    ["@lsp.typemod.property.readonly"] = { fg = p.property },
+
     -- rust-analyzer extensions to the standard semantic-token vocabulary.
-    ["@lsp.type.builtinType"]      = { fg = p.type, italic = true },
-    ["@lsp.type.selfKeyword"]      = { fg = p.type, italic = true },
-    ["@lsp.type.selfTypeKeyword"]  = { fg = p.type, italic = true },
+    ["@lsp.type.builtinType"]      = { fg = p.type, italic = false, bold = false },
+    ["@lsp.type.selfKeyword"]      = { fg = p.keyword, italic = false, bold = false },
+    ["@lsp.type.selfTypeKeyword"]  = { fg = p.keyword, italic = false, bold = false },
     ["@lsp.type.lifetime"]         = { fg = p.parameter },
     ["@lsp.type.formatSpecifier"]  = { fg = p.number },
     ["@lsp.type.deriveHelper"]     = { fg = p.attribute },

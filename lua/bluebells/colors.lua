@@ -14,18 +14,18 @@ local palette = {
   -- syntax
   comment     = "#4f5563", -- slate gray
   variable    = "#ccd4dd", -- light gray/white
-  parameter   = "#b0c4de", -- glacier blue
+  parameter   = "#ccd4dd", -- light gray/white
   property    = "#52b788", -- light moss green
-  ["function"] = "#5c7ccf", -- deep forest blue
-  type        = "#9b72cf", -- intense violet
-  constructor = "#3a5a40", -- pine green
+  ["function"] = "#5c7ccf", -- blue
+  type        = "#5c7ccf", -- blue
+  constructor = "#5c7ccf", -- blue
   keyword     = "#9b72cf", -- intense violet
-  operator    = "#b0c4de", -- glacier blue
+  operator    = "#ccd4dd", -- light gray/white
   string      = "#8cb416", -- moss green
   number      = "#e09f3e", -- dim amber
   boolean     = "#9b72cf", -- intense violet
-  constant    = "#b0c4de", -- glacier blue
-  punctuation = "#4f5563", -- slate gray
+  constant    = "#9b72cf", -- intense violet
+  punctuation = "#8b93a1", -- soft gray, brighter than comments
   tag         = "#9b72cf", -- intense violet
   attribute   = "#52b788", -- moss green
 

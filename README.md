@@ -51,11 +51,11 @@ Every value comes straight from the Bluebells design tokens:
 | `border`      | `#2a2a2a` | window separators, float borders   |
 | `fg`          | `#ccd4dd` | default text                       |
 | `muted`       | `#4f5563` | comments, punctuation, line numbers|
-| `parameter`   | `#b0c4de` | function parameters, operators     |
+| `parameter`   | `#ccd4dd` | function parameters                |
 | `property`    | `#52b788` | object properties, attributes      |
 | `function`    | `#5c7ccf` | function names                     |
-| `type`        | `#9b72cf` | types, keywords, booleans, tags     |
-| `constructor` | `#3a5a40` | constructors                        |
+| `type`        | `#5c7ccf` | types                               |
+| `constructor` | `#5c7ccf` | constructors                        |
 | `string`      | `#8cb416` | strings                            |
 | `number`      | `#e09f3e` | numbers                            |
 | `error`       | `#c94c4c` | error diagnostics                  |

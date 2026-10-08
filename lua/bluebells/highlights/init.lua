@@ -21,6 +21,11 @@ function M.apply(config)
     if ok then
       local groups = highlights.setup(config)
       for hl, spec in pairs(groups) do
+        -- Bluebells is intentionally a plain-weight theme. Keep this here as
+        -- a final guard so plugin defaults and legacy style options cannot
+        -- reintroduce bold or italic text.
+        spec.bold = false
+        spec.italic = false
         vim.api.nvim_set_hl(0, hl, spec)
       end
     end
