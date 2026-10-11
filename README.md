@@ -42,14 +42,16 @@ Bluebells includes native colors for:
 - lazy.nvim and Mason
 - lualine.nvim (`theme = "auto"` or `theme = "bluebells"`)
 - dashboard-nvim (Doom and Hyper themes)
+- milli.nvim, including dynamic splash colors and its screensaver background
 - Neo-tree and Telescope
 - nvim-cmp and active LuaSnip nodes
 - Trouble and LazyGit
 
 nvim-web-devicons and colorviewer.nvim intentionally keep the colors they are
 displaying. Plenary, nvim-lspconfig, mason-lspconfig, Autopairs, Autotag and
-Surround do not require theme-specific groups. Milli creates its animation
-colors dynamically and inherits the dashboard/editor background.
+Surround do not require theme-specific groups. Milli's generated RGB groups
+are preserved when Bluebells is reloaded, so each animation keeps its original
+colors instead of being flattened to the theme palette.
 
 ## Structure
 

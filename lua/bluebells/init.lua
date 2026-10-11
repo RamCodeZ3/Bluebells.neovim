@@ -101,6 +101,27 @@ local function set_terminal_colors(config)
   end
 end
 
+local function capture_milli_colors()
+  local colors = {}
+
+  -- milli.nvim caches the names of its generated highlight groups. If a
+  -- colorscheme clears them, Milli keeps returning the cached names and the
+  -- animation loses its colors. Preserve the exact RGB specs across reloads.
+  for name, spec in pairs(vim.api.nvim_get_hl(0, {})) do
+    if name:match("^MilliSplash_") then
+      colors[name] = spec
+    end
+  end
+
+  return colors
+end
+
+local function restore_highlights(highlights)
+  for name, spec in pairs(highlights) do
+    vim.api.nvim_set_hl(0, name, spec)
+  end
+end
+
 ---@param opts? BluebellsConfig
 function M.setup(opts)
   M.config = vim.tbl_deep_extend("force", M.config, opts or {})
@@ -111,6 +132,8 @@ function M.load(theme)
   local config = M.config
   theme = theme or M.config.background[vim.o.background] or M.config.theme
   M._CURRENT_THEME = theme
+
+  local milli_colors = capture_milli_colors()
 
   if vim.g.colors_name then
     vim.cmd("hi clear")
@@ -124,6 +147,7 @@ function M.load(theme)
   start_treesitter(config)
   set_terminal_colors(config)
   require("bluebells.highlights").apply(config)
+  restore_highlights(milli_colors)
 end
 
 return M

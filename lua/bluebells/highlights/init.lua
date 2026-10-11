@@ -14,6 +14,7 @@ function M.apply(config)
     "plugins/lazy",
     "plugins/lazygit",
     "plugins/mason",
+    "plugins/milli",
     "plugins/neo-tree",
     "plugins/nvim-cmp",
     "plugins/telescope",
