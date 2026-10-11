@@ -3,10 +3,11 @@
 A Neovim colorscheme built on the Bluebells palette (dark, blue/violet/moss
 accents on a near-black background).
 
-Bluebells starts Treesitter highlighting automatically for JavaScript,
-TypeScript, TSX, Python and Rust when their parsers are installed. Set
-`treesitter = false` in `require("bluebells").setup()` if highlighting is
-managed elsewhere in your configuration.
+Bluebells starts Treesitter highlighting automatically for Bash, CSS, GraphQL,
+HTML, JavaScript, JSON, Lua, Markdown, Python, Regex, Rust, SQL, TypeScript and
+TSX when their parsers are installed. Set `treesitter = false` in
+`require("bluebells").setup()` if highlighting is managed elsewhere in your
+configuration.
 
 ## Try it locally (lazy.nvim)
 
@@ -20,6 +21,35 @@ managed elsewhere in your configuration.
   end,
 }
 ```
+
+Options can be set before loading the colorscheme:
+
+```lua
+require("bluebells").setup({
+  transparent = false,
+  dimInactive = false,
+  undercurl = true,
+  terminalColors = true,
+  treesitter = true,
+})
+vim.cmd.colorscheme("bluebells")
+```
+
+## Plugin support
+
+Bluebells includes native colors for:
+
+- lazy.nvim and Mason
+- lualine.nvim (`theme = "auto"` or `theme = "bluebells"`)
+- dashboard-nvim (Doom and Hyper themes)
+- Neo-tree and Telescope
+- nvim-cmp and active LuaSnip nodes
+- Trouble and LazyGit
+
+nvim-web-devicons and colorviewer.nvim intentionally keep the colors they are
+displaying. Plenary, nvim-lspconfig, mason-lspconfig, Autopairs, Autotag and
+Surround do not require theme-specific groups. Milli creates its animation
+colors dynamically and inherits the dashboard/editor background.
 
 ## Structure
 
@@ -36,7 +66,11 @@ bluebells.nvim/
             ├── editor.lua     -- core UI groups (Normal, StatusLine, Pmenu, ...)
             ├── syntax.lua     -- classic Vim syntax groups (Comment, String, ...)
             ├── lsp.lua        -- diagnostic groups
-            └── treesitter.lua -- @capture groups
+            ├── treesitter.lua -- @capture groups
+            └── plugins/       -- plugin-specific highlight groups
+    └── lualine/
+        └── themes/
+            └── bluebells.lua  -- native lualine theme
 ```
 
 ## Palette (`lua/bluebells/colors.lua`)
@@ -84,5 +118,5 @@ end
 return M
 ```
 
-Then uncomment / add its path to the `hl_files` list in
+Then add its path to the `hl_files` list in
 `lua/bluebells/highlights/init.lua`.

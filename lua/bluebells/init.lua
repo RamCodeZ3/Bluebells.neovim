@@ -18,10 +18,20 @@ M.config = {
 }
 
 local treesitter_filetypes = {
+  "bash",
+  "css",
+  "graphql",
+  "html",
   "javascript",
   "javascriptreact",
+  "json",
+  "lua",
+  "markdown",
+  "markdown_inline",
   "python",
+  "regex",
   "rust",
+  "sql",
   "typescript",
   "typescriptreact",
 }
@@ -61,6 +71,36 @@ local function start_treesitter(config)
   end
 end
 
+local function set_terminal_colors(config)
+  if not config.terminalColors then
+    return
+  end
+
+  local p = require("bluebells.colors")
+  local colors = {
+    p.bg,
+    p.error,
+    p.string,
+    p.warning,
+    p["function"],
+    p.keyword,
+    p.hint,
+    p.fg,
+    p.muted,
+    p.error,
+    p.property,
+    p.number,
+    p.info,
+    p.keyword,
+    p.parameter,
+    p.fg,
+  }
+
+  for index, color in ipairs(colors) do
+    vim.g["terminal_color_" .. (index - 1)] = color
+  end
+end
+
 ---@param opts? BluebellsConfig
 function M.setup(opts)
   M.config = vim.tbl_deep_extend("force", M.config, opts or {})
@@ -82,6 +122,7 @@ function M.load(theme)
   -- Keep classic Vim syntax available as a fallback when a parser is absent.
   vim.cmd("syntax enable")
   start_treesitter(config)
+  set_terminal_colors(config)
   require("bluebells.highlights").apply(config)
 end
 

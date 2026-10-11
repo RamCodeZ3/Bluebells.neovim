@@ -10,10 +10,14 @@ function M.apply(config)
     "syntax",
     "lsp",
     "treesitter",
-    -- "plugins/nvim-tree",
-    -- "plugins/gitsigns",
-    -- "plugins/cmp",
-    -- "plugins/indent-blankline",
+    "plugins/dashboard",
+    "plugins/lazy",
+    "plugins/lazygit",
+    "plugins/mason",
+    "plugins/neo-tree",
+    "plugins/nvim-cmp",
+    "plugins/telescope",
+    "plugins/trouble",
   }
 
   for _, highlight in ipairs(hl_files) do
