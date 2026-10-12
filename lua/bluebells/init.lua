@@ -3,18 +3,10 @@ local M = {}
 ---@class BluebellsConfig
 M.config = {
   undercurl = true,
-  commentStyle = { italic = false },
-  functionStyle = {},
-  keywordStyle = {},
-  statementStyle = {},
-  typeStyle = {},
   dimInactive = false,
   terminalColors = true,
   transparent = false,
   treesitter = true,
-  ---@type { dark: string, light: string }
-  background = { dark = "default", light = "default" }, -- reserved for a future light variant
-  theme = "default",
 }
 
 local treesitter_filetypes = {
@@ -127,11 +119,8 @@ function M.setup(opts)
   M.config = vim.tbl_deep_extend("force", M.config, opts or {})
 end
 
----@param theme? string
-function M.load(theme)
+function M.load()
   local config = M.config
-  theme = theme or M.config.background[vim.o.background] or M.config.theme
-  M._CURRENT_THEME = theme
 
   local milli_colors = capture_milli_colors()
 
