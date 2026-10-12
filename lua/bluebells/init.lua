@@ -7,6 +7,7 @@ M.config = {
   terminalColors = true,
   transparent = false,
   treesitter = true,
+  theme = "default",
 }
 
 local treesitter_filetypes = {
@@ -119,8 +120,11 @@ function M.setup(opts)
   M.config = vim.tbl_deep_extend("force", M.config, opts or {})
 end
 
-function M.load()
+---@param theme? string
+function M.load(theme)
   local config = M.config
+  theme = theme or config.theme
+  M._CURRENT_THEME = theme
 
   local milli_colors = capture_milli_colors()
 

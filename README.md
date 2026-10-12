@@ -26,6 +26,7 @@ Options can be set before loading the colorscheme:
 
 ```lua
 require("bluebells").setup({
+  theme = "default",
   transparent = false,
   dimInactive = false,
   undercurl = true,
